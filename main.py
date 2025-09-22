@@ -32,19 +32,6 @@ def resource_path(*parts: str) -> str:
     return os.path.join(base, *parts)
 
 
-def open_with_default_app(path: str) -> bool:
-    """Open a file with the OS default application. Returns True if launched."""
-    try:
-        if os.name == 'nt':
-            os.startfile(path)  # type: ignore[attr-defined]
-        elif sys.platform == 'darwin':
-            subprocess.Popen(['open', path])
-        else:
-            subprocess.Popen(['xdg-open', path])
-        return True
-    except Exception as e:
-        print(f"Failed to open file: {e}")
-        return False
 
 
 def find_video_in_assets() -> Optional[str]:
